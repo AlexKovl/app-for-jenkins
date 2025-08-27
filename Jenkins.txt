@@ -1,0 +1,41 @@
+pipeline {
+//    agent { docker { image 'python:latest'}}
+    agent any    
+
+    environment {
+        OWNER_NAME = "Me"
+    }
+
+    stages {
+        stage('1-Build') {
+            steps {
+                echo 'Building...'
+                echo "Hello ${OWNER_NAME}"
+            }
+        }
+        stage('2-Test') {
+            steps {
+                echo 'Testing...'
+                sh '''
+                    echo "Line 1"
+                    echo "Line 2"
+                    ls -la
+                '''
+            }
+        }
+        stage('3-Deploy') {
+            steps {
+                echo 'Deploying...'
+                sh "ls -la"
+            }
+        }
+        stage('4-Docker') {
+            steps {
+                echo 'Dockering...'
+                sh 'python3 --version'
+                sh "pwd"
+            }
+        }
+
+    }
+}
